@@ -12,6 +12,7 @@ interface IPricesData {
 
 const Home: NextPage = () => {
   const [textSearch, setTextSearch] = useState("");
+  const [exactSearch, setExactSearch] = useState(false);
   const [pricesData, setPricesData] = useState<IPricesData[]>([
     { name: "teste", price: "0", link: "" },
     { name: "teste 2", price: "0", link: "" },
@@ -30,8 +31,16 @@ const Home: NextPage = () => {
     setPriceDataSorted(
       pricesData
         .filter((item) => {
-          const price = String(item.price).trim().replace(".", "").replace(",", "");
+          const price = String(item.price)
+            .trim()
+            .replace(".", "")
+            .replace(",", "");
           return (
+            ((exactSearch &&
+              String(item.name)
+                .toUpperCase()
+                .includes(textSearch.toUpperCase())) ||
+              !exactSearch) &&
             Number(price) > 0
           );
         })
@@ -47,7 +56,7 @@ const Home: NextPage = () => {
     );
 
     console.log(priceDataSorted);
-  }, [pricesData]);
+  }, [pricesData, exactSearch]);
 
   return (
     <>
@@ -63,6 +72,9 @@ const Home: NextPage = () => {
             onChange={(e) => setTextSearch(e.target.value)}
           />
           <button onClick={() => search(textSearch)}>Pesquisar</button>
+          <button onClick={() => setExactSearch(!exactSearch)}>
+            {exactSearch ? "Pesquisa Aproximada" : "Pesquisa exata"}
+          </button>
         </div>
       </header>
       <main>
