@@ -30,11 +30,9 @@ const Home: NextPage = () => {
     setPriceDataSorted(
       pricesData
         .filter((item) => {
-          const price = String(item.price).trim();
+          const price = String(item.price).trim().replace(".", "").replace(",", "");
           return (
-            price != "None" &&
-            price != "---" &&
-            Number.isInteger(price.replace(".", ""))
+            Number(price) > 0
           );
         })
         .sort(function (a, b) {
