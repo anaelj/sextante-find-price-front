@@ -28,16 +28,27 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setPriceDataSorted(
-      pricesData.filter(item => item.price != 'None' && item.price != ' ---').sort(function (a, b) {
-        if (a.price > b.price) {
-          return 1;
-        }
-        if (a.price < b.price) {
-          return -1;
-        }
-        return 0;
-      })
+      pricesData
+        .filter((item) => {
+          const price = String(item.price).trim();
+          return (
+            price != "None" &&
+            price != "---" &&
+            Number.isInteger(price.replace(".", ""))
+          );
+        })
+        .sort(function (a, b) {
+          if (Number(a.price) > Number(b.price)) {
+            return 1;
+          }
+          if (Number(a.price) < Number(b.price)) {
+            return -1;
+          }
+          return 0;
+        })
     );
+
+    console.log(priceDataSorted);
   }, [pricesData]);
 
   return (
@@ -74,7 +85,10 @@ const Home: NextPage = () => {
                   <div
                     className={`col-sm-1 col-md-1 col-lg-1 col-xl-1 ${styles.price}`}
                   >
-                    {item.price}
+                    {new Intl.NumberFormat("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    }).format(Number(item.price))}
                   </div>
                 </div>
               );
