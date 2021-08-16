@@ -106,7 +106,7 @@ const Home: NextPage = () => {
           {!finding && priceDataSorted.length > 0 &&
             priceDataSorted.map((item, idx) => {
               return (
-                <a target="_blank" href={item.link} key={idx}>
+                <a target="_blank" href={item.link} key={idx} className={styles.link}>
                   <div className={`card ${styles.cardStyled}`}>
                     <div className="card-body">
                       <div className="row">
