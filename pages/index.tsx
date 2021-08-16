@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.scss";
 import api from "./api/api.js";
+import ReactLoading from "react-loading";
 
 interface IPricesData {
   name: string;
@@ -11,6 +12,7 @@ interface IPricesData {
 }
 
 const Home: NextPage = () => {
+  const [finding, setFinding] = useState(false);
   const [textSearch, setTextSearch] = useState("");
   const [exactSearch, setExactSearch] = useState(false);
   const [pricesData, setPricesData] = useState<IPricesData[]>([
@@ -20,10 +22,12 @@ const Home: NextPage = () => {
   const [priceDataSorted, setPriceDataSorted] = useState<IPricesData[]>([]);
 
   const search = (value: string) => {
-    console.log(`Pesquisando por... ${value}`);
+    // console.log(`Pesquisando por... ${value}`);
+    setFinding(true);
     api.get(`/prices?textSearch=${value}`).then((res) => {
       setPricesData(res.data);
-      console.log(`Pesquisa concluída... ${value}`);
+      setFinding(false);
+      // console.log(`Pesquisa concluída... ${value}`);
     });
   };
 
@@ -88,8 +92,18 @@ const Home: NextPage = () => {
         </div>
       </header>
       <main>
+        <div className={`container ${styles.loading}`}>
+          {finding && (
+            <ReactLoading
+              type="balls"
+              color="#bf8756"
+              height={67}
+              width={300}
+            />
+          )}
+        </div>
         <div className="container">
-          {priceDataSorted.length > 0 &&
+          {!finding && priceDataSorted.length > 0 &&
             priceDataSorted.map((item, idx) => {
               return (
                 <a target="_blank" href={item.link} key={idx}>

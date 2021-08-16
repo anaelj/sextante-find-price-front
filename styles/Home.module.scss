@@ -5,6 +5,13 @@ $Viagem-3: #bfcdd9;
 $Viagem-4: #bf8756;
 $Viagem-5: #8c4f2b;
 
+.loading{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .header {
   background: $Viagem-1;
 }
