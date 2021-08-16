@@ -1,11 +1,67 @@
+/* Color Theme Swatches in Hex */
+$Viagem-1: #51608c;
+$Viagem-2: #8697a6;
+$Viagem-3: #bfcdd9;
+$Viagem-4: #bf8756;
+$Viagem-5: #8c4f2b;
 
+.header {
+  background: $Viagem-1;
+}
+
+.cardStyled {
+  margin: 5px;
+  border: 2px solid $Viagem-1;
+}
+
+.button {
+  margin-right: 16px;
+  border: none;
+  height: auto;
+  color: white;
+  background: none;
+  height: auto;
+  outline: none;
+
+  &:hover {
+    background: $Viagem-4;
+  }
+}
+
+.PesquisaMain {
+  border-radius: 8px;
+  padding: 5px;
+
+  input {
+    border: none;
+    width: 300px;
+    height: auto;
+    outline: none;
+    border-bottom: 3px solid $Viagem-1;
+    &:focus {
+      border-bottom: 3px solid $Viagem-4;
+    }
+  }
+}
+
+.PesquisaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
 
 .name {
-  @media (max-width: 500px) {
+  @media (max-width: 580px) {
     max-width: 150px;
   }
 }
 
 .price {
   max-width: 150px;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: end;
 }

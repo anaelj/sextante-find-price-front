@@ -60,19 +60,29 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <header>
-        <div className="container">
-          <label htmlFor="pesquisa">Pesquise</label>
-          <input
-            type="text"
-            name="pesquisa"
-            id="pesquisa"
-            placeholder="gtx 1660 super"
-            value={textSearch}
-            onChange={(e) => setTextSearch(e.target.value)}
-          />
-          <button onClick={() => search(textSearch)}>Pesquisar</button>
-          <button onClick={() => setExactSearch(!exactSearch)}>
+      <header className={styles.header}>
+        <div className={`container ${styles.PesquisaContainer}`}>
+          <label htmlFor="pesquisa"></label>
+          <div className={styles.PesquisaMain}>
+            <input
+              type="text"
+              name="pesquisa"
+              id="pesquisa"
+              placeholder="ex: gtx 1660 super"
+              value={textSearch}
+              onChange={(e) => setTextSearch(e.target.value)}
+            />
+            <button
+              className={styles.button}
+              onClick={() => search(textSearch)}
+            >
+              Pesquisar
+            </button>
+          </div>
+          <button
+            className={styles.button}
+            onClick={() => setExactSearch(!exactSearch)}
+          >
             {exactSearch ? "Pesquisa Aproximada" : "Pesquisa exata"}
           </button>
         </div>
@@ -82,25 +92,29 @@ const Home: NextPage = () => {
           {priceDataSorted.length > 0 &&
             priceDataSorted.map((item, idx) => {
               return (
-                <div className="row" key={idx}>
-                  <div
-                    className={`col-sm-8 col-md-8 col-lg-11 col-xl-11 ${styles.name}`}
-                  >
-                    <div className={styles.teste}>
-                      <a target="_blank" href={item.link}>
-                        {item.name}
-                      </a>
+                <a target="_blank" href={item.link} key={idx}>
+                  <div className={`card ${styles.cardStyled}`}>
+                    <div className="card-body">
+                      <div className="row">
+                        <div
+                          className={`col-sm-10 col-md-10 col-lg-10 col-xl-10 ${styles.name}`}
+                        >
+                          <div className={styles.teste}>{item.name}</div>
+                        </div>
+                        <div
+                          className={`col-sm-2 col-md-2 col-lg-2 col-xl-2 ${styles.price}`}
+                        >
+                          <span>
+                            {new Intl.NumberFormat("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            }).format(Number(item.price))}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div
-                    className={`col-sm-1 col-md-1 col-lg-1 col-xl-1 ${styles.price}`}
-                  >
-                    {new Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(Number(item.price))}
-                  </div>
-                </div>
+                </a>
               );
             })}
         </div>
