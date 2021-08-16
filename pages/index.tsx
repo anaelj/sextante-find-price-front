@@ -21,11 +21,11 @@ const Home: NextPage = () => {
   ]);
   const [priceDataSorted, setPriceDataSorted] = useState<IPricesData[]>([]);
 
-  const handleKeyDown = (event : any) => {
-    if(event.keyCode === 13) { 
-        search(textSearch);
-  }
-}
+  const handleKeyDown = (event: any) => {
+    if (event.keyCode === 13) {
+      search(textSearch);
+    }
+  };
 
   const search = (value: string) => {
     // console.log(`Pesquisando por... ${value}`);
@@ -64,6 +64,7 @@ const Home: NextPage = () => {
           return 0;
         })
     );
+console.log(exactSearch)
 
     // console.log(priceDataSorted);
   }, [pricesData, exactSearch]);
@@ -72,29 +73,24 @@ const Home: NextPage = () => {
     <>
       <header className={styles.header}>
         <div className={`container ${styles.PesquisaContainer}`}>
-          <label htmlFor="pesquisa"></label>
-          <div className={styles.PesquisaMain}>
-            <input
-              type="text"
-              name="pesquisa"
-              id="pesquisa"
-              placeholder="ex: gtx 1660 super"
-              value={textSearch}
-              onChange={(e) => setTextSearch(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e)}
-            />
-            <button
-              className={styles.button}
-              onClick={() => search(textSearch)}
-            >
-              Pesquisar
-            </button>
-          </div>
+          <input
+            type="text"
+            name="pesquisa"
+            id="pesquisa"
+            placeholder="ex: gtx 1660 super"
+            value={textSearch}
+            onChange={(e) => setTextSearch(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
+            className={styles.inputSearch}
+          />
+          <button className={styles.button} onClick={() => search(textSearch)}>
+            Pesquisar
+          </button>
           <button
-            className={styles.button}
+            className={exactSearch ? styles.buttonUnchecked : styles.buttonChecked }
             onClick={() => setExactSearch(!exactSearch)}
           >
-            {exactSearch ? "Pesquisa Aproximada" : "Pesquisa exata"}
+           Refinar
           </button>
         </div>
       </header>
@@ -110,10 +106,16 @@ const Home: NextPage = () => {
           )}
         </div>
         <div className="container">
-          {!finding && priceDataSorted.length > 0 &&
+          {!finding &&
+            priceDataSorted.length > 0 &&
             priceDataSorted.map((item, idx) => {
               return (
-                <a target="_blank" href={item.link} key={idx} className={styles.link}>
+                <a
+                  target="_blank"
+                  href={item.link}
+                  key={idx}
+                  className={styles.link}
+                >
                   <div className={`card ${styles.cardStyled}`}>
                     <div className="card-body">
                       <div className="row">

@@ -35,33 +35,47 @@ $Viagem-5: #8c4f2b;
   background: none;
   height: auto;
   outline: none;
-
   &:hover {
     background: $Viagem-4;
   }
 }
+.buttonChecked {
+  @extend .button;
+  background: green;
+}
+.buttonUnchecked {
+  @extend .button;
+  background: $Viagem-4;
+}
+
+
 
 .PesquisaMain {
   border-radius: 8px;
   padding: 5px;
 
-  input {
-    border: none;
-    width: 300px;
-    height: auto;
-    outline: none;
-    border-bottom: 3px solid $Viagem-1;
-    &:focus {
-      border-bottom: 3px solid $Viagem-4;
-    }
+ 
+}
+
+.inputSearch {
+  border: none;
+  width: 300px;
+  height: auto;
+  outline: none;
+  border-bottom: 3px solid $Viagem-1;
+  margin-left: 5px;
+  &:focus {
+    border-bottom: 3px solid $Viagem-4;
   }
 }
+
 
 .PesquisaContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
+
 }
 
 .name {
