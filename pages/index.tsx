@@ -21,6 +21,12 @@ const Home: NextPage = () => {
   ]);
   const [priceDataSorted, setPriceDataSorted] = useState<IPricesData[]>([]);
 
+  const handleKeyDown = (event : any) => {
+    if(event.keyCode === 13) { 
+        search(textSearch);
+  }
+}
+
   const search = (value: string) => {
     // console.log(`Pesquisando por... ${value}`);
     setFinding(true);
@@ -75,6 +81,7 @@ const Home: NextPage = () => {
               placeholder="ex: gtx 1660 super"
               value={textSearch}
               onChange={(e) => setTextSearch(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e)}
             />
             <button
               className={styles.button}
@@ -95,7 +102,7 @@ const Home: NextPage = () => {
         <div className={`container ${styles.loading}`}>
           {finding && (
             <ReactLoading
-              type="balls"
+              type="cylon"
               color="#bf8756"
               height={67}
               width={300}
