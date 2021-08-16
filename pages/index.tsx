@@ -65,7 +65,7 @@ const Home: NextPage = () => {
         })
     );
 
-    console.log(priceDataSorted);
+    // console.log(priceDataSorted);
   }, [pricesData, exactSearch]);
 
   return (
