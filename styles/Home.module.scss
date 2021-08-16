@@ -25,6 +25,8 @@ $Viagem-5: #8c4f2b;
 .cardStyled {
   margin: 5px;
   border: 2px solid $Viagem-1;
+  max-height: 80px;
+  overflow: hidden;
 }
 
 .button {
